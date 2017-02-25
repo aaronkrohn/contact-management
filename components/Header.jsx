@@ -8,9 +8,9 @@ const defaultStyle = {
 };
 
 class Header extends Component {
-  handleSave(text){
-    console.log('handleSave ',text);
-    const person = {name:text, surname: text, email: text}
+
+  handleSave(person){
+    console.log('handleSave ', person);
     this.props.addContactAction(person);
   }
 
@@ -20,7 +20,7 @@ class Header extends Component {
     return (
       <header className="header">
           <AppBar showMenuIconButton={false} title="Contact Management App" />
-          <h1 style={defaultStyle}>Contacts</h1>
+          <h3 style={defaultStyle}>Contacts</h3>
           <ContactTextInput
             newContact
             onSave={this.handleSave.bind(this)}

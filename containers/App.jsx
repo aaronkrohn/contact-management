@@ -11,8 +11,7 @@ import theme from '../src/material_ui_raw_theme_file'
 class App extends Component {
   render() {
   const { contacts, actions } = this.props;
-    console.log('contacts(state) ', contacts);
-    console.log('ContactActions ', actions);
+    console.log('APP state ', contacts);
 
     return (
       <div>

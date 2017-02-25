@@ -14,7 +14,7 @@ class MainSection extends Component {
 
   render() {
     const {contacts, actions} = this.props;
-    console.log('___Main Sections ', contacts);
+
     return (
       <section className="main" style={defaultStyle}>
         <List className="contact-list">

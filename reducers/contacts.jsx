@@ -9,21 +9,13 @@ const initialState = [{
   }
 }];
 
-// return [{
-//   id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-//   completed: false,
-//   text: action.text
-// }, ...state];
-
 export default function contacts(state = initialState, action) {
-  console.log('action ', action);
-
+  console.log('reducer ', action);
   switch (action.type) {
-
     case ADD_CONTACT:
       return [{
-        id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-        person: action.person
+        id: state.reduce((maxId, contact) => Math.max(contact.id, maxId), -1) + 1,
+        person: action.personObject
       }, ...state];
 
     default:
