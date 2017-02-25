@@ -10,13 +10,14 @@ import theme from '../src/material_ui_raw_theme_file'
 class App extends Component {
   render() {
   const { contacts, actions } = this.props;
-    console.log(contacts);
-    console.log(actions);
+    console.log('contacts(state) ', contacts);
+    console.log('ContactActions ', actions);
+
     return (
       <div>
         <MuiThemeProvider muiTheme={theme}>
           <div>
-            <Header addContact={actions.addContact} />
+            <Header contacts={contacts} addContactAction={actions.addContactAction} />
           </div>
         </MuiThemeProvider>
       </div>

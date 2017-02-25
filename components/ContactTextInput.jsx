@@ -5,7 +5,7 @@ const defaultStyle = {
   marginLeft: 20
 };
 
-class TodoTextInput extends Component {
+class ContactTextInput extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -34,4 +34,4 @@ class TodoTextInput extends Component {
   }
 }
 
-export default TodoTextInput;
+export default ContactTextInput;
