@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes';
 
-export function addContactAction(text) {
-  return { type: types.ADD_CONTACT, text };
+export function addContactAction(personObject) {
+  return { type: types.ADD_CONTACT, personObject };
 }

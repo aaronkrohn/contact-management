@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Header from '../components/Header';
+import MainSection from '../components/MainSection';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as ContactActions from '../actions/contacts';
@@ -18,6 +19,7 @@ class App extends Component {
         <MuiThemeProvider muiTheme={theme}>
           <div>
             <Header contacts={contacts} addContactAction={actions.addContactAction} />
+            <MainSection contacts={contacts} actions={actions} />
           </div>
         </MuiThemeProvider>
       </div>
