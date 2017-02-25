@@ -17,7 +17,8 @@ class ContactItem extends Component {
   }
 
   handleEdit() {
-    this.setState({editing: true});
+    let editState = !this.state.editing;
+    this.setState({editing: editState});
   }
 
   handleEditCancel() {
@@ -39,12 +40,14 @@ class ContactItem extends Component {
       element = (
         <div>
           <ContactTextInput
-            text={contact.person}
+            name={contact.person.name}
+            email={contact.person.email}
+            surname={contact.person.surname}
             editing={this.state.editing}
             onSave={(text) => this.handleSave(contact.id, text)}
           />
           <RaisedButton
-            onClick={this.handleEditCancel.bind(this)}
+            onClick={this.handleEdit.bind(this)}
             label="Cancel edit"
             primary={false}
           />

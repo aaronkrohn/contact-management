@@ -26,7 +26,6 @@ class ContactTextInput extends Component {
       surname: surname.input.value.trim(),
       email: email.input.value.trim()
     }
-    console.log('click ', person);
     this.props.onSave(person);
 
     if (this.props.newContact) {
