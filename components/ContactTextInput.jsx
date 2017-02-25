@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton';
+import { TextField, RaisedButton } from 'material-ui'
 
 const defaultStyle = {
   paddingLeft: 20
@@ -12,10 +11,11 @@ const style = {
 class ContactTextInput extends Component {
   constructor(props, context) {
     super(props, context);
+
     this.state = {
-      text1: this.props.text || '',
-      text2: this.props.text || '',
-      text3: this.props.text || ''
+      text1: this.props.name || '',
+      text2: this.props.surname || '',
+      text3: this.props.email || ''
     };
   }
 

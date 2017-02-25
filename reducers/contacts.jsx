@@ -1,4 +1,4 @@
-import {ADD_CONTACT} from '../constants/ActionTypes';
+import {ADD_CONTACT, DELETE_CONTACT} from '../constants/ActionTypes';
 
 const initialState = [{
   id: 0,
@@ -17,6 +17,9 @@ export default function contacts(state = initialState, action) {
         id: state.reduce((maxId, contact) => Math.max(contact.id, maxId), -1) + 1,
         person: action.personObject
       }, ...state];
+
+    case DELETE_CONTACT:
+      return state.filter(contact => contact.id !== action.id);
 
     default:
       return state;

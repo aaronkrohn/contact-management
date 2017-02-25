@@ -3,8 +3,8 @@ import ContactItem from './ContactItem';
 import {Checkbox, List} from 'material-ui';
 
 const defaultStyle = {
-  width: 500,
-  marginLeft: 20
+  marginLeft: 20,
+  marginRight: 20
 };
 
 class MainSection extends Component {
