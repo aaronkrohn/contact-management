@@ -23,8 +23,7 @@ class Header extends Component {
           <h3 style={defaultStyle}>Contacts</h3>
           <ContactTextInput
             newContact
-            onSave={this.handleSave.bind(this)}
-            placeholder="What needs to be done?" />
+            onSave={this.handleSave.bind(this)} />
       </header>
     );
   }

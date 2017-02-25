@@ -12,7 +12,7 @@ class ContactItem extends Component {
 
   render() {
     const { contact } = this.props;
-    const name = `${contact.person.name} ${contact.person.surname}`;
+    const name = `${contact.person.name} ${contact.person.surname}  ${contact.person.email}`;
 
     return (
       <div className={classnames({editing: this.state.editing})}>
