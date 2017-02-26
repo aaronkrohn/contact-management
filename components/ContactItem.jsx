@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import ContactTextInput from './ContactTextInput';
 import { List, grey200, grey400, ListItem, Avatar, MoreVertIcon, RaisedButton, IconButton, IconMenu, MenuItem } from 'material-ui';
 
-const listStyle = {
+const constactStyle = {
   background: '#f7f7f7',
   marginTop: 5
 }
@@ -21,10 +21,9 @@ class ContactItem extends Component {
     this.setState({editing: editState});
   }
 
-  handleEditCancel() {
-    this.setState({editing: false});
+  handleEditSave(person) {
+    this.props.editContactAction(person);
   }
-
 
   handleDelete(id) {
     this.props.deleteContactAction(id);
@@ -32,30 +31,28 @@ class ContactItem extends Component {
 
   render() {
     const {contact} = this.props;
-    console.log('contact ', contact);
-
 
     let element;
     if (this.state.editing) {
       element = (
         <div>
-          <ContactTextInput
-            name={contact.person.name}
-            email={contact.person.email}
-            surname={contact.person.surname}
-            editing={this.state.editing}
-            onSave={(text) => this.handleSave(contact.id, text)}
-          />
           <RaisedButton
             onClick={this.handleEdit.bind(this)}
             label="Cancel edit"
             primary={false}
           />
+          <ContactTextInput
+            name={contact.person.name}
+            email={contact.person.email}
+            surname={contact.person.surname}
+            editing={this.state.editing}
+            onSave={(person) => this.handleEditSave(contact.id, person)}
+          />
         </div>
       );
     } else {
       element = (
-        <List style={listStyle}>
+        <List>
           <RaisedButton
             onClick={this.handleDelete.bind(this, contact.id)}
             label="Delete Contact"
@@ -86,8 +83,9 @@ class ContactItem extends Component {
     }
 
     return (
-      <div className={classnames({
-        editing: this.state.editing
+      <div style={constactStyle} className={classnames({
+        'editing': this.state.editing,
+        'contact-panel': true
       })}>
         {element}
       </div>

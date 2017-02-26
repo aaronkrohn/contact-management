@@ -1,4 +1,4 @@
-import {ADD_CONTACT, DELETE_CONTACT} from '../constants/ActionTypes';
+import {ADD_CONTACT, DELETE_CONTACT, EDIT_CONTACT } from '../constants/ActionTypes';
 
 const initialState = [{
   id: 0,
@@ -10,16 +10,24 @@ const initialState = [{
 }];
 
 export default function contacts(state = initialState, action) {
-  console.log('reducer ', action);
   switch (action.type) {
     case ADD_CONTACT:
+      console.log('ADD_CONTACT ', ADD_CONTACT);
       return [{
         id: state.reduce((maxId, contact) => Math.max(contact.id, maxId), -1) + 1,
         person: action.personObject
       }, ...state];
 
     case DELETE_CONTACT:
+      console.log('DELETE_CONTACT ', DELETE_CONTACT);
       return state.filter(contact => contact.id !== action.id);
+
+    case EDIT_CONTACT:
+      return state.map(contact =>
+        contact.id === action.id ?
+          Object.assign({}, contact, { person: action.personObject }) :
+          contact
+      );
 
     default:
       return state;
