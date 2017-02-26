@@ -5,8 +5,7 @@ import { List, grey200, grey400, ListItem, Avatar, MoreVertIcon, RaisedButton, I
 
 const contactStyle = {
   background: '#f7f7f7',
-  marginTop: 5,
-  padding: 10
+  marginTop: 5
 }
 
 class ContactItem extends Component {
@@ -37,11 +36,6 @@ class ContactItem extends Component {
     if (this.state.editing) {
       element = (
         <div>
-          <RaisedButton
-            onClick={this.handleEdit.bind(this)}
-            label="Cancel edit"
-            primary={false}
-          />
           <ContactTextInput
             name={contact.person.name}
             email={contact.person.email}
@@ -49,6 +43,7 @@ class ContactItem extends Component {
             editing={this.state.editing}
             contactBtn={false}
             contactID={contact.id}
+            onEditCancel={this.handleEdit.bind(this)}
             onSave={(id, person) => this.handleEditSave(id, person)}
           />
         </div>
@@ -56,6 +51,7 @@ class ContactItem extends Component {
     } else {
       element = (
         <List>
+          {/*Edit Mode*/}
           <RaisedButton
             onClick={this.handleDelete.bind(this, contact.id)}
             label="Delete Contact"
