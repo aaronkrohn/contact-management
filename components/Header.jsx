@@ -4,7 +4,8 @@ import ContactTextInput from './ContactTextInput';
 import AppBar from 'material-ui/AppBar';
 
 const defaultStyle = {
-  marginLeft: 20
+  marginLeft: 20,
+  width: 300
 };
 
 class Header extends Component {

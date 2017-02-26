@@ -7,6 +7,9 @@ const defaultStyle = {
 const style = {
   padding: 15
 };
+const wrapperStyle = {
+  width: 300
+};
 
 class ContactTextInput extends Component {
   constructor(props, context) {
@@ -45,7 +48,7 @@ class ContactTextInput extends Component {
       surname: surname.input.value.trim(),
       email: email.input.value.trim()
     }
-    
+
     this.props.onSave(this.props.contactID, person);
   }
 
@@ -94,7 +97,7 @@ class ContactTextInput extends Component {
     }
 
     return (
-      <div>
+      <div style={wrapperStyle}>
         {SaveEditBtn}
         <TextField ref="name"
                    id='new-contact-input-name'
