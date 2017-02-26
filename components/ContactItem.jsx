@@ -3,9 +3,10 @@ import classnames from 'classnames';
 import ContactTextInput from './ContactTextInput';
 import { List, grey200, grey400, ListItem, Avatar, MoreVertIcon, RaisedButton, IconButton, IconMenu, MenuItem } from 'material-ui';
 
-const constactStyle = {
+const contactStyle = {
   background: '#f7f7f7',
-  marginTop: 5
+  marginTop: 5,
+  padding: 10
 }
 
 class ContactItem extends Component {
@@ -85,7 +86,7 @@ class ContactItem extends Component {
     }
 
     return (
-      <div style={constactStyle} className={classnames({
+      <div style={contactStyle} className={classnames({
         'editing': this.state.editing,
         'contact-panel': true
       })}>
