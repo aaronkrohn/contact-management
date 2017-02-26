@@ -51,7 +51,6 @@ class ContactItem extends Component {
     } else {
       element = (
         <List>
-          {/*Edit Mode*/}
           <RaisedButton
             onClick={this.handleDelete.bind(this, contact.id)}
             label="Delete Contact"

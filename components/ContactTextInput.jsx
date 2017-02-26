@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
-import {TextField, RaisedButton} from 'material-ui'
+import {TextField, RaisedButton, orange500} from 'material-ui'
 
-const defaultStyle = {
-  paddingLeft: 20
-};
 const style = {
-  marginLeft: 20,
-  marginTop: 15
-};
-const wrapperStyle = {
-  width: 300
-};
+  listWrapper: {
+    width: 300
+  },
+  textField: {
+    paddingLeft: 20
+  },
+  addContact: {
+    marginLeft: 20,
+    marginTop: 15
+  }
+}
 
 class ContactTextInput extends Component {
   constructor(props, context) {
@@ -23,17 +25,20 @@ class ContactTextInput extends Component {
     };
   }
 
-  handleClick() {
+  handleAddContact() {
     const {name, surname, email} = this.refs;
+    const fieldName = name.input.value.trim();
+    const fieldSurname = surname.input.value.trim();
+    const fieldEmail = email.input.value.trim();
     const person = {
-      name: name.input.value.trim(),
-      surname: surname.input.value.trim(),
-      email: email.input.value.trim()
+      name: fieldName,
+      surname: fieldSurname,
+      email: fieldEmail
     }
 
-    this.props.onSave(person);
+    if (fieldName && fieldSurname && fieldEmail) {
+      this.props.onSave(person);
 
-    if (this.props.newContact) {
       this.setState({
         text1: '',
         text2: '',
@@ -53,7 +58,7 @@ class ContactTextInput extends Component {
     this.props.onSave(this.props.contactID, person);
   }
 
-  handleEditCancel(){
+  handleEditCancel() {
     this.props.onEditCancel();
   }
 
@@ -77,9 +82,9 @@ class ContactTextInput extends Component {
 
     if (contactBtn) {
       AddContactbtn = (
-        <div style={style}>
+        <div style={style.addContact}>
           <RaisedButton
-            onClick={this.handleClick.bind(this)}
+            onClick={this.handleAddContact.bind(this)}
             label="Add contact"
             primary={true}
             fullWidth={true}
@@ -93,9 +98,10 @@ class ContactTextInput extends Component {
     if (editing) {
       SaveEditBtn = (
         <div style={style}>
+          {/*Edit Mode*/}
           <RaisedButton
             onClick={this.handleEditSave.bind(this)}
-            label="Save"
+            label="Save Contact"
             primary={true}
           />
           <RaisedButton
@@ -111,12 +117,12 @@ class ContactTextInput extends Component {
     }
 
     return (
-      <div style={wrapperStyle}>
+      <div style={style.listWrapper}>
         {SaveEditBtn}
         <TextField
           ref="name"
           id='new-contact-input-name'
-          style={defaultStyle}
+          style={style.textField}
           type="text"
           value={this.state.text1}
           autoFocus="true"
@@ -127,10 +133,10 @@ class ContactTextInput extends Component {
         <TextField
           ref="surname"
           id='new-contact-input-surname'
-          style={defaultStyle}
+          style={style.textField}
           type="text"
           value={this.state.text2}
-          autoFocus="true"
+          autoFocus="false"
           hintText="Surname"
           onChange={this.handleChange.bind(this)}
         />
@@ -138,10 +144,10 @@ class ContactTextInput extends Component {
         <TextField
           ref="email"
           id='new-contact-input-email'
-          style={defaultStyle}
+          style={style.textField}
           type="text"
           value={this.state.text3}
-          autoFocus="true"
+          autoFocus="false"
           hintText="Email"
           onChange={this.handleChange.bind(this)}
         />
