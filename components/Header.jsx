@@ -23,6 +23,7 @@ class Header extends Component {
           <h3 style={defaultStyle}>Contacts</h3>
           <ContactTextInput
             newContact
+            contactBtn={true}
             onSave={this.handleSave.bind(this)} />
       </header>
     );

@@ -21,8 +21,8 @@ class ContactItem extends Component {
     this.setState({editing: editState});
   }
 
-  handleEditSave(person) {
-    this.props.editContactAction(person);
+  handleEditSave(id, person) {
+    this.props.editContactAction(id, person);
   }
 
   handleDelete(id) {
@@ -46,7 +46,9 @@ class ContactItem extends Component {
             email={contact.person.email}
             surname={contact.person.surname}
             editing={this.state.editing}
-            onSave={(person) => this.handleEditSave(contact.id, person)}
+            contactBtn={false}
+            contactID={contact.id}
+            onSave={(id, person) => this.handleEditSave(id, person)}
           />
         </div>
       );

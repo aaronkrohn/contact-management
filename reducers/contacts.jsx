@@ -12,14 +12,12 @@ const initialState = [{
 export default function contacts(state = initialState, action) {
   switch (action.type) {
     case ADD_CONTACT:
-      console.log('ADD_CONTACT ', ADD_CONTACT);
       return [{
         id: state.reduce((maxId, contact) => Math.max(contact.id, maxId), -1) + 1,
         person: action.personObject
       }, ...state];
 
     case DELETE_CONTACT:
-      console.log('DELETE_CONTACT ', DELETE_CONTACT);
       return state.filter(contact => contact.id !== action.id);
 
     case EDIT_CONTACT:

@@ -8,6 +8,6 @@ export function deleteContactAction(id) {
   return { type: types.DELETE_CONTACT, id };
 }
 
-export function editContactAction(id, text) {
-  return { type: types.EDIT_CONTACT, id, text };
+export function editContactAction(id, personObject) {
+  return { type: types.EDIT_CONTACT, id, personObject };
 }

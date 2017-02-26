@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { TextField, RaisedButton } from 'material-ui'
+import {TextField, RaisedButton} from 'material-ui'
 
 const defaultStyle = {
   paddingLeft: 20
@@ -26,6 +26,7 @@ class ContactTextInput extends Component {
       surname: surname.input.value.trim(),
       email: email.input.value.trim()
     }
+
     this.props.onSave(person);
 
     if (this.props.newContact) {
@@ -35,6 +36,17 @@ class ContactTextInput extends Component {
         text3: ''
       });
     }
+  }
+
+  handleEditSave() {
+    const {name, surname, email} = this.refs;
+    const person = {
+      name: name.input.value.trim(),
+      surname: surname.input.value.trim(),
+      email: email.input.value.trim()
+    }
+    
+    this.props.onSave(this.props.contactID, person);
   }
 
   handleChange(event) {
@@ -51,8 +63,39 @@ class ContactTextInput extends Component {
   }
 
   render() {
+    const {editing, contactBtn} = this.props;
+    let AddContactbtn = null;
+    let SaveEditBtn = null;
+
+    if (contactBtn) {
+      AddContactbtn = (
+        <div style={style}>
+          <RaisedButton onClick={this.handleClick.bind(this)}
+                        label="Add contact"
+                        primary={true}
+                        fullWidth={true}/>
+        </div>
+      );
+    } else {
+      AddContactbtn = null;
+    }
+
+    if (editing) {
+      SaveEditBtn = (
+        <div style={style}>
+          <RaisedButton onClick={this.handleEditSave.bind(this)}
+                        label="Save"
+                        primary={true}/>
+        </div>
+      );
+
+    } else {
+      SaveEditBtn = null;
+    }
+
     return (
       <div>
+        {SaveEditBtn}
         <TextField ref="name"
                    id='new-contact-input-name'
                    style={defaultStyle}
@@ -80,12 +123,7 @@ class ContactTextInput extends Component {
                    hintText="Email"
                    onChange={this.handleChange.bind(this)}/>
 
-        <div style={style}>
-          <RaisedButton onClick={this.handleClick.bind(this)}
-                        label="Add contact"
-                        primary={true}
-                        fullWidth={true}/>
-        </div>
+        {AddContactbtn}
       </div>
     );
   }
