@@ -22,6 +22,8 @@ class ContactItem extends Component {
   }
 
   handleEditSave(id, person) {
+    let editState = !this.state.editing;
+    this.setState({editing: editState});
     this.props.editContactAction(id, person);
   }
 
