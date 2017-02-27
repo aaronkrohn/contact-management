@@ -1,14 +1,16 @@
 {
   "name": "react-redux-material_ui-boilerplate",
   "version": "1.0.0",
-  "description": "A boilerplate for React + Redux + Material UI + ES6 syntax application",
+  "description": "Contact Management App",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server -d --hot --inline --progress --colors",
-    "build": "webpack --progress --colors"
+    "build": "webpack --progress --colors",
+    "test": "karma start"
   },
   "repository": {
     "type": "git",
+    "url": "https://github.com/aaronkrohn/contact-management.git"
     "url": "https://github.com/takanabe/react-redux-material_ui-boilerplate.git"
   },
   "keywords": [
@@ -18,11 +20,7 @@
     "Bable",
     "ES6"
   ],
-  "author": "https://github.com/takanabe",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/takanabe/react-redux-material_ui-boilerplate/issues"
-  },
   "homepage": "",
   "devDependencies": {
     "babel-core": "^6.17.0",
