@@ -2,76 +2,48 @@
 const webpackConfig = require('./webpack.config.js');
 //https://github.com/sethmcl/typescript-webpack-karma-mocha
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
-
-    // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
-
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+    // ... normal karma configuration
     frameworks: ['mocha', 'chai'],
-
-    // list of files / patterns to load in the browser
-    files: [
-      'reducers/contactsSpec.js'
-    ],
 
     // list of files to exclude
     exclude: [
       'node_modules/**/*Spec.js'
     ],
 
+    files: [
+      // all files ending in "_test"
+      {pattern: 'reducers/contactsSpec.js', watched: true}
+      //{pattern: 'test/**/*_test.js', watched: false}
+      // each file acts as entry point for the webpack configuration
+    ],
+
+    preprocessors: {
+      // add webpack as preprocessor
+      'reducers/contactsSpec.js': ['webpack']
+    },
+
+    // karma watches the test entry points
+    // (you don't need to specify the entry option)
+    // webpack watches dependencies
+
     // webpack configuration
     webpack: {
       devtool: 'eval-source-map',
       debug: true,
-      module: webpackConfig.module,
+      module: webpackConfig.module.loaders,
       resolve: webpackConfig.resolve
     },
-
-    webpackMiddleware: {
-      quiet: true,
-      stats: {
-        colors: true
-      }
-    },
-
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      '**/*Spec.js': ['webpack'],
-      '**/*Spec.jsx': ['webpack']
-    },
-
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
-
-    // web server port
-    port: 9876,
-
-    // enable / disable colors in the output (reporters and logs)
-    colors: true,
-
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
-
-    // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['PhantomJS'],
 
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
-
-    // Concurrency level
-    // how many browser should be started simultaneous
-    concurrency: Infinity
+    webpackMiddleware: {
+      // webpack-dev-middleware configuration
+      // i. e.
+      stats: 'errors-only'
+    }
   });
 };
