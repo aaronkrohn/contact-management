@@ -2,23 +2,22 @@
 var webpack = require('karma-webpack');
 var webpackConfig = require('./webpack.config');
 
-webpackConfig.module.loaders = [
-  {
+webpackConfig.module.loaders = [{
     test: /\.(js|jsx)$/, exclude: /(bower_components|node_modules)/,
     loader: 'babel-loader'
-  }
-];
-webpackConfig.module.postLoaders = [{
-  test: /\.(js|jsx)$/, exclude: /(node_modules|bower_components|tests)/,
-  loader: 'istanbul-instrumenter'
-}];
+ }];
+
+//webpackConfig.module.postLoaders = [{
+//  test: /\.(js|jsx)$/, exclude: /(node_modules|bower_components)/,
+//  loader: 'istanbul-instrumenter'
+//}];
 
 module.exports = function (config) {
   config.set({
     frameworks: [ 'jasmine' ],
     files: [
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
-      'tests/**/*_spec.js'
+      'reducers/**/*_spec.js'
     ],
     plugins: [
       webpack,
@@ -31,7 +30,7 @@ module.exports = function (config) {
     ],
     browsers: [ 'PhantomJS' ],
     preprocessors: {
-      'tests/**/*_spec.js': ['webpack'],
+      'reducers/**/*_spec.js': ['webpack'],
       'src/**/*.js': ['webpack']
     },
     reporters: [ 'spec', 'coverage' ],
