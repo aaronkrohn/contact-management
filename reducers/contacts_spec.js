@@ -75,4 +75,40 @@ describe('Test Reducers', () => {
       contacts(state, {type: ADD_CONTACT, personObject})
     ).toEqual(afterState);
   });
+
+  it('Should DELETE contact', () => {
+    const state = [
+      {
+        id: 1,
+        person: {
+          name: 'Jason',
+          surname: 'Krohn',
+          email: 'jasonkrohn@hotmail.com'
+        }
+      },
+      {
+        id: 0,
+        person: {
+          name: 'Aaron',
+          surname: 'Krohn',
+          email: 'aaronkrohn@hotmail.com'
+        }
+      }
+    ];
+
+    const afterState = [
+      {
+        id: 0,
+        person: {
+          name: 'Aaron',
+          surname: 'Krohn',
+          email: 'aaronkrohn@hotmail.com'
+        }
+      }
+    ];
+
+    expect(
+      contacts(state, {type: DELETE_CONTACT, id: 1})
+    ).toEqual(afterState);
+  });
 });
