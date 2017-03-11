@@ -1,49 +1,49 @@
 // Karma configuration
-const webpackConfig = require('./webpack.config.js');
-//https://github.com/sethmcl/typescript-webpack-karma-mocha
+var webpack = require('karma-webpack');
+var webpackConfig = require('./webpack.config');
+
+webpackConfig.module.loaders = [
+  {
+    test: /\.(js|jsx)$/, exclude: /(bower_components|node_modules)/,
+    loader: 'babel-loader'
+  }
+];
+webpackConfig.module.postLoaders = [{
+  test: /\.(js|jsx)$/, exclude: /(node_modules|bower_components|tests)/,
+  loader: 'istanbul-instrumenter'
+}];
 
 module.exports = function (config) {
   config.set({
-    // ... normal karma configuration
-    frameworks: ['mocha', 'chai'],
-
-    // list of files to exclude
-    exclude: [
-      'node_modules/**/*Spec.js'
-    ],
-
+    frameworks: [ 'jasmine' ],
     files: [
-      // all files ending in "_test"
-      {pattern: 'reducers/contactsSpec.js', watched: true}
-      //{pattern: 'test/**/*_test.js', watched: false}
-      // each file acts as entry point for the webpack configuration
+      './node_modules/phantomjs-polyfill/bind-polyfill.js',
+      'tests/**/*_spec.js'
     ],
-
+    plugins: [
+      webpack,
+      'karma-jasmine',
+      'karma-chrome-launcher',
+      'karma-firefox-launcher',
+      'karma-phantomjs-launcher',
+      'karma-coverage',
+      'karma-spec-reporter'
+    ],
+    browsers: [ 'PhantomJS' ],
     preprocessors: {
-      // add webpack as preprocessor
-      'reducers/contactsSpec.js': ['webpack']
+      'tests/**/*_spec.js': ['webpack'],
+      'src/**/*.js': ['webpack']
     },
-
-    // karma watches the test entry points
-    // (you don't need to specify the entry option)
-    // webpack watches dependencies
-
-    // webpack configuration
-    webpack: {
-      devtool: 'eval-source-map',
-      debug: true,
-      module: webpackConfig.module.loaders,
-      resolve: webpackConfig.resolve
+    reporters: [ 'spec', 'coverage' ],
+    coverageReporter: {
+      dir: 'build/reports/coverage',
+      reporters: [
+        { type: 'html', subdir: 'report-html' },
+        { type: 'lcov', subdir: 'report-lcov' },
+        { type: 'cobertura', subdir: '.', file: 'cobertura.txt' }
+      ]
     },
-
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
-
-    webpackMiddleware: {
-      // webpack-dev-middleware configuration
-      // i. e.
-      stats: 'errors-only'
-    }
+    webpack: webpackConfig,
+    webpackMiddleware: { noInfo: true }
   });
 };
