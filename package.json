@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server -d --hot --inline --progress --colors",
     "build": "webpack --progress --colors",
-    "t": "karma start --auto-watch --no-single-run karma.conf.js"
+    "test": "karma start --auto-watch --no-single-run karma.conf.js"
   },
   "repository": {
     "type": "git",
